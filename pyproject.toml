@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "adf"
+name = "cognite-endpoint"
 version = "0.1.0"
 description = ""
-authors = ["Maureen <maureen@live.no>"]
+authors = ["Pedro Lindeza"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
