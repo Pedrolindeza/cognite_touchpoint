@@ -1,0 +1,8 @@
+projects:
+  - project-name: johancastberg
+    dataset-name: johancastberg_sepals
+    dataset-ext_id: johancastberg_sepals
+
+  - project-name: noafulla
+    dataset-name: noafulla_sepals
+    dataset-ext_id: noafulla_sepals

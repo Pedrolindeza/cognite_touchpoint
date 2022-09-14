@@ -1,16 +1,15 @@
 import sys
 import yaml
+sys.path.insert(
+    0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_weight_budget/weight_budget"
+)
 from cognite.client import CogniteClient
 from cdf_util import CDFUtil
 from cdf_fun_wb import CDF_Function_WB
 from client_gen import client_gen
 
-sys.path.insert(
-    0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_weight_budget/weight_budget"
-)
 
-
-def handle(client: CogniteClient, data):
+def main(client: CogniteClient, data):
     with open("env-config.yml", "r") as stream:
         projects = yaml.load(stream, yaml.SafeLoader)
 
@@ -46,12 +45,6 @@ def handle(client: CogniteClient, data):
 
 if __name__ == "__main__":
     data = {
-        "projects": ["noafulla"],
-        "input": {
-            "element_types": [
-                "PWEITCRIT",
-            ],
-            "internal_ids": [],
-        },
+        "projects": ["noafulla"]
     }
-    handle(client_gen("test"), data)
+    main(client_gen("test"), data)

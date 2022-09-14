@@ -1,6 +1,10 @@
 import logging
 import time
 import sys
+sys.path.insert(
+    0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_staad_report_os/report/"
+)
+
 from report_util import (
     create_report_from_df,
     create_and_upload_support_reactions,
@@ -11,9 +15,6 @@ import base_case_logic as base_case_logic
 from client_gen import client_gen
 from report_util import create_report_from_df
 
-sys.path.insert(
-    0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_staad_report_os/report/"
-)
 
 
 dataset_id = 5601372144288760  # test
