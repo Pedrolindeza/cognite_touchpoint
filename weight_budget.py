@@ -1,5 +1,6 @@
 import sys
 import yaml
+
 sys.path.insert(
     0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_weight_budget/weight_budget"
 )
@@ -44,7 +45,5 @@ def main(client: CogniteClient, data):
 
 
 if __name__ == "__main__":
-    data = {
-        "projects": ["noafulla"]
-    }
+    data = {"projects": ["noafulla"]}
     main(client_gen("test"), data)

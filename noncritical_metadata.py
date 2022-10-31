@@ -4,7 +4,8 @@ import sys
 from client_gen import client_gen
 
 sys.path.insert(
-    0, "/Users/pedrolindeza/repos/Sepals/functions/cognite_metadata_noncritical_loads/non_critical_metadata"
+    0,
+    "/Users/pedrolindeza/repos/Sepals/functions/cognite_metadata_noncritical_loads/non_critical_metadata",
 )
 from cognite.client import CogniteClient
 from cognite.client.exceptions import CogniteAPIError
@@ -13,6 +14,7 @@ from util import (
     get_branch_name_and_text,
     get_load_df,
 )
+
 
 def main(client: CogniteClient) -> None:
     project = "noafulla"
@@ -23,6 +25,8 @@ def main(client: CogniteClient) -> None:
 
     logging.info("Fetching sequences from CDF")
     e3d_df = client.raw.rows.list(db, e3d_table_name, limit=-1).to_pandas()
+    e3d_df = e3d_df.loc[e3d_df["deleted"] != "1"]
+    e3d_df = e3d_df.drop_duplicates()
 
     if e3d_df.empty:
         logging.info(f"No rows found for table: {e3d_table_name} in db: {db}")
@@ -62,10 +66,8 @@ def main(client: CogniteClient) -> None:
         datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
     )
 
-    if nonCriticalMetadata.past_due:
-        logging.info("The timer is past due!")
-
     logging.info("Python timer trigger function ran at %s", utc_timestamp)
+
 
 if __name__ == "__main__":
     main(client_gen("test"))

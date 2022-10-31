@@ -1,6 +1,14 @@
+import uuid
+
 import arrow as arrow
 from client_gen import client_gen
 from cognite.client import CogniteClient
+from cognite.client.data_classes import (
+    Asset,
+    Relationship,
+    Sequence,
+    SequenceUpdate,
+)
 import pandas as pd
 
 
@@ -107,7 +115,10 @@ def delete_old_input_OS(client: CogniteClient):
     element_types = client.assets.list(
         parent_external_ids=["noafulla_staad_OS"], limit=None
     ).to_pandas()
-    seq_df = client.sequences.list(limit=None, external_id_prefix="noafulla_staad_OS_").to_pandas()
+    seq_df = client.sequences.list(
+        limit=None, external_id_prefix="noafulla_staad_OS_"
+    ).to_pandas()
+    rel_df = client.relationships.list(limit=None).to_pandas()
     vip_seq = []
     for elm in element_types["name"]:
         seq_elm = seq_df.loc[seq_df["name"] == elm]
@@ -119,7 +130,10 @@ def delete_old_input_OS(client: CogniteClient):
         aux.sort_values(by="createdTime", inplace=True)
         aux.reset_index(inplace=True)
         for i in range(aux.shape[0] - 1):
-            delete_seq_rel(aux.loc[i, "externalId"], client)
+            client.sequences.delete(external_id=aux.loc[i, "externalId"])
+            for a, low in rel_df.iterrows():
+                if aux.loc[i, "externalId"] in low["targetExternalId"]:
+                    client.relationships.delete(external_id=low["externalId"])
         vip_seq.append(aux.iloc[-1, aux.columns.get_loc("externalId")])
 
         seq_elm = seq_df.loc[seq_df["name"] == f"calc_{elm}"]
@@ -131,19 +145,26 @@ def delete_old_input_OS(client: CogniteClient):
         aux.sort_values(by="createdTime", inplace=True)
         aux.reset_index(inplace=True)
         for i in range(aux.shape[0] - 1):
-            delete_seq_rel(aux.loc[i, "externalId"], client)
+            client.sequences.delete(external_id=aux.loc[i, "externalId"])
+            for a, low in rel_df.iterrows():
+                if aux.loc[i, "externalId"] in low["targetExternalId"]:
+                    client.relationships.delete(external_id=low["externalId"])
         vip_seq.append(aux.iloc[-1, aux.columns.get_loc("externalId")])
 
     print(vip_seq)
 
 
-def delete_old_input_critical(client: CogniteClient):
+def delete_old_input_PS(client: CogniteClient):
     element_types = client.assets.list(
-        parent_external_ids=["noafulla_caesar_critical_loads"], limit=None
+        parent_external_ids=["noafulla_staad_PS"], limit=None
     ).to_pandas()
-    seq_df = client.sequences.list(limit=None, external_id_prefix="noafulla_caesar_critical_loads_").to_pandas()
+    seq_df = client.sequences.list(
+        limit=None, external_id_prefix="noafulla_staad_PS_"
+    ).to_pandas()
+    rel_df = client.relationships.list(limit=None).to_pandas()
     vip_seq = []
     for elm in element_types["name"]:
+        print(elm)
         seq_elm = seq_df.loc[seq_df["name"] == elm]
         aux2 = seq_elm.copy()  # to avoid warnings
         aux2.loc[:, "createdTime"] = pd.to_datetime(
@@ -152,7 +173,46 @@ def delete_old_input_critical(client: CogniteClient):
         aux = aux2.copy()  # to avoid warnings
         aux.sort_values(by="createdTime", inplace=True)
         aux.reset_index(inplace=True)
-        if aux.shape[0] > 0 :
+        for i in range(aux.shape[0] - 1):
+            client.sequences.delete(external_id=aux.loc[i, "externalId"])
+            for a, low in rel_df.iterrows():
+                if aux.loc[i, "externalId"] in low["targetExternalId"]:
+                    client.relationships.delete(external_id=low["externalId"])
+
+        seq_elm = seq_df.loc[seq_df["name"] == f"calc_{elm}"]
+        aux2 = seq_elm.copy()  # to avoid warnings
+        aux2.loc[:, "createdTime"] = pd.to_datetime(
+            aux2.loc[:, "createdTime"], unit="ms"
+        )
+        aux = aux2.copy()  # to avoid warnings
+        aux.sort_values(by="createdTime", inplace=True)
+        aux.reset_index(inplace=True)
+        for i in range(aux.shape[0] - 1):
+            client.sequences.delete(external_id=aux.loc[i, "externalId"])
+            for a, low in rel_df.iterrows():
+                if aux.loc[i, "externalId"] in low["targetExternalId"]:
+                    client.relationships.delete(external_id=low["externalId"])
+
+
+def delete_old_input_critical(client: CogniteClient):
+    element_types = client.assets.list(
+        parent_external_ids=["noafulla_caesar_critical_loads"], limit=None
+    ).to_pandas()
+    seq_df = client.sequences.list(
+        limit=None, external_id_prefix="noafulla_caesar_critical_loads_"
+    ).to_pandas()
+    vip_seq = []
+    for elm in element_types["name"]:
+        print(elm)
+        seq_elm = seq_df.loc[seq_df["name"] == elm]
+        aux2 = seq_elm.copy()  # to avoid warnings
+        aux2.loc[:, "createdTime"] = pd.to_datetime(
+            aux2.loc[:, "createdTime"], unit="ms"
+        )
+        aux = aux2.copy()  # to avoid warnings
+        aux.sort_values(by="createdTime", inplace=True)
+        aux.reset_index(inplace=True)
+        if aux.shape[0] > 0:
             for i in range(aux.shape[0] - 1):
                 delete_seq_rel(aux.loc[i, "externalId"], client)
 
@@ -185,16 +245,14 @@ def delete_old_input_critical(client: CogniteClient):
 
 def delete_recent_input(client, prefix):
     seq_df = client.sequences.list(limit=None, external_id_prefix=prefix).to_pandas()
-
     aux2 = seq_df.copy()  # to avoid warnings
     aux2.loc[:, "createdTime"] = pd.to_datetime(aux2.loc[:, "createdTime"], unit="ms")
     aux = aux2.copy()  # to avoid warnings
     aux.sort_values(by="createdTime", inplace=True, ascending=False)
     aux.reset_index(inplace=True)
-
     for i in range(aux.shape[0] - 1):
         delete_seq_rel(aux.loc[i, "externalId"], client)
 
 
 if __name__ == "__main__":
-    delete_seq_rel("noafulla_caesar_critical_loads_base_case_29002_9b5793fd-ddd8-4eb0-82e0-d70dad7a4585", client_gen("test"))
+    client = client_gen("test")

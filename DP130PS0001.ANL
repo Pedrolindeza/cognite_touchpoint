@@ -1,0 +1,797 @@
+                                                                 PAGE NO.    1
+
+
+
+             ****************************************************
+             *                                                  *
+             *           STAAD.Pro CONNECT Edition              *
+             *           Version  22.03.00.28                   *
+             *           Proprietary Program of                 *
+             *           Bentley Systems, Inc.                  *
+             *           Date=    SEP 26, 2022                  *
+             *           Time=    13:58:13                      *
+             *                                                  *
+             *  Licensed to: Aker ASA - ELS                     *
+             ****************************************************
+
+
+
+     1. STAAD SPACE CALCULATION PIPESUPPORT
+INPUT FILE: C:\temp\STAADC~1\DP130PS0001.STD
+     2. START JOB INFORMATION
+     3. *
+     4. ** SEPALS HEADING **
+     5. ** PIPE SUPPORT IN THIS CALCULATION
+     6. ** /DP130PS0001
+     7. ** CAESAR RUNS IN THIS CALCULATION
+     8. ** 29002
+     9. *
+    10. ENGINEER DATE 26-SEP-22
+    11. JOB NAME NOA PDQ SEPALS COPY
+    12. JOB CLIENT AKER BP
+    13. JOB NO  /DP130PS0001
+    14. JOB REV XX
+    15. ENGINEER NAME 300404
+    16. END JOB INFORMATION
+    17. INPUT WIDTH 79
+    18. SET Z UP
+
+   **WARNING- THE FOLLOWING COMMANDS SHOULD NOT BE USED WHEN THE SET Z UP
+     IS ALSO ENTERED: FLOOR LOAD, AREA LOAD, WIND LOAD, Nonlinear Cable Analysis
+     & GENERATION of SPRING SUPPORTS for ELASTIC MAT FOUNDATIONS
+
+    19. UNIT MMS KN
+    20. *
+    21. *********************************GEOMETRY**************************************
+    22. JOINT COORDINATES
+    23. 1 344990 87975 504905
+    24. 2 344010 87975 504905
+    25. 3 344990 87242 504905
+    26. 4 344010 87242 504905
+    27. 5 346140 87242 504905
+    28. 6 345110 87242 504905
+    29. 7 345252 87975 504855
+    30. 8 345252 87975 503981
+    31. 9 345252 87242 504905
+    32. 10 344452 87975 503981
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    2
+
+    33. 11 344452 87242 504905
+    34. 12 345252 87975 503751
+    35. 13 344452 87975 503751
+    36. 14 344452 87975 504905
+    37. 15 344852 87975 503751
+    38. MEMBER INCIDENCES
+    39. 100 2 14
+    40. 101 14 1
+    41. 102 9 8
+    42. 103 11 10
+    43. 104 4 11
+    44. 105 11 3
+    45. 106 6 9
+    46. 107 9 5
+    47. 108 13 15
+    48. 109 15 12
+    49. 110 7 8
+    50. 111 8 12
+    51. 112 14 10
+    52. 113 10 13
+    53. MEMBER PROPERTY COLDFORMED EUROPEAN
+    54. 113 112 111 110 109 108 103 102 TABLE ST SHS100X100X6
+    55. 107 106 105 104 101 100 TABLE ST SHS100X100X6.3
+    56. *
+    57. ****************************MATERIAL DEFINITION********************************
+    58. DEFINE MATERIAL START
+    59. ISOTROPIC STEEL_LD
+    60. E 210
+    61. POISSON 0.3
+    62. DENSITY 7.62957E-008
+    63. ALPHA 1.2E-005
+    64. DAMP 0.03
+    65. ISOTROPIC STEEL_CS
+    66. E 197.93
+    67. POISSON 0.3
+    68. DENSITY 7.68195E-008
+    69. ALPHA 1.2E-005
+    70. DAMP 0.03
+    71. END DEFINE MATERIAL
+    72. *
+    73. *
+    74. ***********************MATERIAL AND SUPPORTS ASSIGNING*************************
+    75. CONSTANTS
+    76. MATERIAL STEEL_CS MEMB 100 101 104 105 106 107
+    77. MATERIAL STEEL_LD MEMB 102 103 108 109 110 111 112 113
+    78. SUPPORTS
+    79. 5 6 3 4 2 1 7 FIXED
+    80. *
+    81. *********************************DEFINING LOAD*********************************
+    82. UNIT METER KN
+    83. **********************************
+    84. ** OPERATING LOADS
+    85. **********************************
+    86. LOAD 501 SUPPORT SELFWEIGHT VERTICAL
+    87. SELFWEIGHT Z -1
+    88. *
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    3
+
+    89. **********************************
+    90. ** OPERATING LOADS
+    91. **********************************
+    92. LOAD 601 PIPING OPERATING, +X DIRECTION
+    93. JOINT LOAD
+    94. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+    95. 15 FX 1.8
+    97. LOAD 602 PIPING OPERATING, +Y DIRECTION
+    98. JOINT LOAD
+    99. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   100. 15 FY 6.3
+   102. LOAD 603 PIPING OPERATING, -Z DIRECTION
+   103. JOINT LOAD
+   104. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   105. 15 FZ -12.9
+   107. ************************************
+   108. *** BLAST LOADS
+   109. ************************************
+   110. LOAD 701 PIPE ACCIDENTAL, +X DIRECTION
+   111. JOINT LOAD
+   112. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   113. 15 FX 0
+   115. LOAD 702 PIPE ACCIDENTAL, +Y DIRECTION
+   116. JOINT LOAD
+   117. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   118. 15 FY 57.8
+   120. LOAD 703 PIPE ACCIDENTAL, -Z DIRECTION
+   121. JOINT LOAD
+   122. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   123. 15 FZ -52.5
+   125. *
+   126. *
+   127. **********************************
+   128. ** SEPALS LOADS
+   129. **********************************
+   130. ***********************
+   131. LOAD  1 - CAESAR LOADCASE MAX ABS FX (OPERATING) (HORZ LOAD)
+   132. ***********************
+   133. SELFWEIGHT Z -1
+   134. JOINT LOAD
+   135. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   136. 15 FX 1.2
+   137. 15 FY 6.3
+   138. 15 FZ -8
+   139. *WT OF PS DETAILS
+   140. 15 FZ -0.2
+   141. *
+   142. ***********************
+   143. LOAD  2 - CAESAR LOADCASE MAX ABS FZ (OPERATING) (HORZ LOAD)
+   144. ***********************
+   145. SELFWEIGHT Z -1
+   146. JOINT LOAD
+   147. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   148. 15 FX 1.8
+   149. 15 FY 1
+   150. 15 FZ -12.6
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    4
+
+   151. *WT OF PS DETAILS
+   152. 15 FZ -0.2
+   153. *
+   154. ***********************
+   155. LOAD  3 - CAESAR LOADCASE MAX -FY (OPERATING) (VERT LOAD) (DOWNWARDS)
+   156. ***********************
+   157. SELFWEIGHT Z -1
+   158. JOINT LOAD
+   159. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   160. 15 FX 1
+   161. 15 FY 0.8
+   162. 15 FZ -12.8
+   163. *WT OF PS DETAILS
+   164. 15 FZ -0.2
+   165. *
+   166. ***********************
+   167. LOAD  4 - CAESAR LOADCASE MAX +FY (OPERATING) (VERT LOAD) (UPWARDS)
+   168. ***********************
+   169. SELFWEIGHT Z -1
+   170. JOINT LOAD
+   171. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   172. 15 FX 0
+   173. 15 FY 0
+   174. 15 FZ 0
+   175. *WT OF PS DETAILS
+   176. 15 FZ -0.2
+   177. *
+   178. ***********************
+   179. LOAD  5 - CAESAR LOADCASE MAX RESULTANT 1(OPERATING)
+   180. ***********************
+   181. SELFWEIGHT Z -1
+   182. JOINT LOAD
+   183. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   184. 15 FX 1.8
+   185. 15 FY 1
+   186. 15 FZ -12.6
+   187. *WT OF PS DETAILS
+   188. 15 FZ -0.2
+   189. *
+   190. ***********************
+   191. LOAD  6 - CAESAR LOADCASE MAX RESULTANT 2(OPERATING)
+   192. ***********************
+   193. SELFWEIGHT Z -1
+   194. JOINT LOAD
+   195. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   196. 15 FX 1
+   197. 15 FY 0.8
+   198. 15 FZ -12.8
+   199. *WT OF PS DETAILS
+   200. 15 FZ -0.2
+   201. *
+   202. ***********************
+   203. LOAD  7 - CAESAR LOADCASE MAX RESULTANT 3(OPERATING)
+   204. ***********************
+   205. SELFWEIGHT Z -1
+   206. JOINT LOAD
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    5
+
+   207. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   208. 15 FX 0
+   209. 15 FY 0.2
+   210. 15 FZ -12.6
+   211. *WT OF PS DETAILS
+   212. 15 FZ -0.2
+   213. *
+   214. ***********************
+   215. LOAD  51 - CAESAR LOADCASE DEAD LOAD (WNC+H)
+   216. ***********************
+   217. SELFWEIGHT Z -1
+   218. JOINT LOAD
+   219. */DP130PS0001/SPNT-01 - STRESSISO:29002 - NODE:90
+   220. 15 FX 0
+   221. 15 FY 0
+   222. 15 FZ -10
+   223. *WT OF PS DETAILS
+   224. 15 FZ -0.2
+   225. *
+   226. ********************DEFINING LOAD COMBINATIONS WITH LOAD FACTORS***************
+   227. *LOAD COMB 1001-1004 ULS LOADS
+   228. LOAD COMB 1001 ULS OPERATIONAL LOAD FX+, FY+
+   229. 501 1.3 601 1.3 602 1.3 603 1.3
+   230. LOAD COMB 1002 ULS OPERATIONAL LOAD FX+, FY -
+   231. 501 1.3 601 1.3 602 -1.3 603 1.3
+   232. LOAD COMB 1003 ULS OPERATIONAL LOAD FX-, FY+
+   233. 501 1.3 601 -1.3 602 1.3 603 1.3
+   234. LOAD COMB 1004 ULS OPERATIONAL LOAD FX-, FY -
+   235. 501 1.3 601 -1.3 602 -1.3 603 1.3
+   236. *
+   237. *LOAD COMB 1101-1103 ALS ACCIDENTAL LOAD
+   238. LOAD COMB 1101 ALS ACCIDENTAL LOAD, +X DIRECTION
+   239. 501 1.0 701 1.0
+   240. LOAD COMB 1102 ALS ACCIDENTAL LOAD, +Y DIRECTION
+   241. 501 1.0 702 1.0
+   242. LOAD COMB 1103 ALS ACCIDENTAL LOAD, -Z DIRECTION
+   243. 501 1.0 703 1.0
+   244. *
+   245. *
+   246. *LOAD COMB 1201-1204 SLS LOADS
+   247. LOAD COMB 1201 SLS DISPLACEMENT FX+, FY+
+   248. 501 1.0 601 1.0 602 1.0 603 1.0
+   249. LOAD COMB 1202 SLS DISPLACEMENT FX+, FY -
+   250. 501 1.0 601 1.0 602 -1.0 603 1.0
+   251. LOAD COMB 1203 SLS DISPLACEMENT FX-, FY+
+   252. 501 1.0 601 -1.0 602 1.0 603 1.0
+   253. LOAD COMB 1204 SLS DISPLACEMENT FX-, FY -
+   254. 501 1.0 601 -1.0 602 -1.0 603 1.0
+   255. *******************************************************************************
+   256. PERFORM ANALYSIS
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    6
+
+
+
+
+            P R O B L E M   S T A T I S T I C S
+            -----------------------------------
+
+     NUMBER OF JOINTS         15  NUMBER OF MEMBERS      14
+     NUMBER OF PLATES          0  NUMBER OF SOLIDS        0
+     NUMBER OF SURFACES        0  NUMBER OF SUPPORTS      7
+
+           Using 64-bit analysis engine.
+
+           SOLVER USED IS THE OUT-OF-CORE BASIC SOLVER
+
+     ORIGINAL/FINAL BAND-WIDTH=    13/     3/     18 DOF
+   TOTAL      PRIMARY LOAD CASES =    15, TOTAL DEGREES OF FREEDOM =      48
+   TOTAL LOAD COMBINATION  CASES =    11  SO FAR.
+     SIZE OF STIFFNESS MATRIX =        1 DOUBLE  KILO-WORDS
+     REQRD/AVAIL. DISK SPACE  =     12.0/  89349.2 MB
+
+
+
+
+   257. STEEL TAKE OFF ALL
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    7
+
+STEEL TAKE OFF 
+
+   STEEL TAKE-OFF
+   --------------
+
+      PROFILE                 LENGTH(METE)      WEIGHT(KN  )
+
+   ST  SHS100X100X6.3               2.99             0.510
+   ST  SHS100X100X6                 5.42             0.893
+                                          ----------------
+                                    TOTAL =          1.403
+
+
+   ************ END OF DATA FROM INTERNAL STORAGE ************
+
+
+   258. LOAD LIST 1 TO 7 51
+   259. PRINT SUPPORT REACTION
+ SUPPORT  REACTION                  
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    8
+
+
+
+
+   SUPPORT REACTIONS -UNIT KN   METE    STRUCTURE TYPE = SPACE
+   -----------------
+
+ JOINT  LOAD   FORCE-X   FORCE-Y   FORCE-Z     MOM-X     MOM-Y     MOM Z
+
+
+      5    1      0.02     -0.18      0.36      0.01      0.11      0.06
+           2      0.00     -0.01      0.03      0.00     -0.00      0.00
+           3      0.01     -0.04      0.07      0.00      0.01      0.01
+           4     -0.00     -0.00      0.09      0.00      0.02      0.00
+           5      0.00     -0.01      0.03      0.00     -0.00      0.00
+           6      0.01     -0.04      0.07      0.00      0.01      0.01
+           7      0.02     -0.05      0.11      0.00      0.02      0.02
+          51      0.02     -0.04      0.10      0.00      0.02      0.01
+      6    1      0.13     -3.56      5.21      0.07     -0.54     -0.35
+           2      0.00     -0.36      0.78      0.03      0.00     -0.03
+           3      0.07     -0.26      0.63      0.02     -0.03     -0.05
+           4     -0.00     -0.00      0.19      0.01     -0.02     -0.00
+           5      0.00     -0.36      0.78      0.03      0.00     -0.03
+           6      0.07     -0.26      0.63      0.02     -0.03     -0.05
+           7      0.15      0.06      0.16      0.02     -0.04     -0.04
+          51      0.11      0.14      0.03      0.02     -0.02     -0.03
+      3    1     -0.22     -1.22      1.82      0.01      0.49      0.34
+           2     -0.25     -0.07      0.27      0.04      0.10      0.05
+           3     -0.20     -0.08      0.30      0.04      0.10      0.04
+           4     -0.00     -0.01      0.13      0.01      0.03      0.00
+           5     -0.25     -0.07      0.27      0.04      0.10      0.05
+           6     -0.20     -0.08      0.30      0.04      0.10      0.04
+           7     -0.14     -0.01      0.23      0.04      0.07      0.02
+          51     -0.11      0.02      0.17      0.03      0.05      0.00
+      4    1     -0.27     -2.17      3.24      0.02     -0.70     -0.47
+           2     -0.31     -0.83      1.38      0.05     -0.25     -0.15
+           3     -0.25     -0.67      1.13      0.05     -0.21     -0.12
+           4     -0.00     -0.02      0.17      0.01     -0.03     -0.00
+           5     -0.31     -0.83      1.38      0.05     -0.25     -0.15
+           6     -0.25     -0.67      1.13      0.05     -0.21     -0.12
+           7     -0.17     -0.36      0.67      0.05     -0.13     -0.06
+          51     -0.13     -0.24      0.50      0.04     -0.09     -0.04
+      2    1     -0.39      0.20      0.76     -0.03     -0.10      0.04
+           2     -0.68      0.08      4.57      0.04     -0.93      0.02
+           3     -0.55      0.08      4.27      0.04     -0.89      0.02
+           4     -0.01      0.01      0.33      0.00     -0.07      0.00
+           5     -0.68      0.08      4.57      0.04     -0.93      0.02
+           6     -0.55      0.08      4.27      0.04     -0.89      0.02
+           7     -0.37      0.07      3.92      0.05     -0.85      0.02
+          51     -0.30      0.05      3.24      0.04     -0.70      0.01
+      1    1     -0.32      0.10     -0.30     -0.02     -0.04     -0.03
+           2     -0.56      0.10      1.85      0.03      0.55     -0.02
+           3     -0.45      0.08      2.02      0.04      0.57     -0.02
+           4     -0.01      0.01      0.24      0.00      0.06     -0.00
+           5     -0.56      0.10      1.85      0.03      0.55     -0.02
+           6     -0.45      0.08      2.02      0.04      0.57     -0.02
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.    9
+
+
+
+
+   SUPPORT REACTIONS -UNIT KN   METE    STRUCTURE TYPE = SPACE
+   -----------------
+
+ JOINT  LOAD   FORCE-X   FORCE-Y   FORCE-Z     MOM-X     MOM-Y     MOM Z
+
+
+           7     -0.31      0.06      2.26      0.04      0.61     -0.02
+          51     -0.25      0.05      1.89      0.03      0.51     -0.01
+      7    1     -0.15      0.53     -1.49      0.05      0.20      0.09
+           2      0.01      0.09      5.34      0.04      0.25     -0.02
+           3      0.37      0.08      5.98      0.04      0.02     -0.03
+           4      0.02      0.01      0.45      0.00     -0.01     -0.00
+           5      0.01      0.09      5.34      0.04      0.25     -0.02
+           6      0.37      0.08      5.98      0.04      0.02     -0.03
+           7      0.81      0.04      6.86      0.04     -0.25     -0.04
+          51      0.65      0.02      5.68      0.03     -0.20     -0.04
+
+
+   ************** END OF LATEST ANALYSIS RESULT **************
+
+
+   260. *
+   261. *******************************CODE CHECK ULS/SLS******************************
+   262. PARAMETER 1
+   263. CODE EN 1993-1-1:2005
+   264. PY 355000 100 101 104 105 106 107
+   265. PY 450000 102 103 108 109 110 111 112 113
+   266. *
+   267. BEAM 3 ALL
+   268. *
+   269. NA 3 ALL
+   270. GM0 1.15 ALL
+   271. GM1 1.15 ALL
+   272. GM2 1.3 ALL
+   273. *
+   274. KY 2 ALL
+   275. KZ 2 ALL
+   276. *
+   277. TRACK 0 ALL
+   278. ELB 1 ALL
+   279. *
+   280. RATIO 0.7 ALL
+   281. *
+   282. LOAD LIST 1001 TO 1004
+   283. *
+   284. CHECK CODE ALL
+STEEL DESIGN   
+
+
+                         STAAD.PRO CODE CHECKING - NS-EN 1993-1-1:2005
+                         ********************************************
+                         NATIONAL ANNEX - NS-EN 1993-1-1:2005/NA 2008
+
+ PROGRAM CODE REVISION V1.13 BS_EC3_2005/1
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   10
+
+
+
+
+ ALL UNITS ARE - KN   METE (UNLESS OTHERWISE Noted)
+
+ MEMBER     TABLE       RESULT/   CRITICAL COND/     RATIO/     LOADING/
+                          FX            MY             MZ       LOCATION
+ =======================================================================
+
+
+     100 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.098      1002
+                        0.98 T         -2.23          -0.04        0.44
+     101 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.065      1004
+                        0.13 C          1.53           0.00        0.00
+     102 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.047      1003
+                        8.65 T         -0.47          -0.45        1.18
+     103 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.047      1001
+                        7.88 T         -0.49           0.47        1.18
+     104 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.075      1001
+                        0.48 T         -1.04          -0.70        0.44
+     105 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.055      1002
+                        0.24 C         -0.73          -0.56        0.00
+     106 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.067      1003
+                        0.60 C         -0.94          -0.61        0.00
+     107 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.024      1003
+                        0.10 T          0.35           0.22        0.00
+     108 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.135      1002
+                        2.33 T         -2.40           1.45        0.40
+     109 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.134      1004
+                        2.54 T          2.37          -1.44        0.00
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   11
+
+
+
+
+ ALL UNITS ARE - KN   METE (UNLESS OTHERWISE Noted)
+
+ MEMBER     TABLE       RESULT/   CRITICAL COND/     RATIO/     LOADING/
+                          FX            MY             MZ       LOCATION
+ =======================================================================
+
+
+     110 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.085      1004
+                       17.34 T         -0.98          -0.56        0.87
+     111 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.090      1004
+                       10.01 T          1.02           1.09        0.00
+     112 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.069      1002
+                       14.65 T          0.96           0.27        0.00
+     113 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.082      1001
+                        9.72 T         -0.95          -0.93        0.00
+
+
+   ************** END OF TABULATED RESULT OF DESIGN **************
+
+
+   285. *
+   286. LOAD LIST 1201 TO 1204
+   287. PRINT JOINT DISPLACEMENTS
+ JOINT    DISPLACE                  
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   12
+
+
+
+
+   JOINT DISPLACEMENT (CM   RADIANS)    STRUCTURE TYPE = SPACE
+   ------------------
+
+ JOINT  LOAD   X-TRANS   Y-TRANS   Z-TRANS   X-ROTAN   Y-ROTAN   Z-ROTAN
+
+
+      1 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      2 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      3 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      4 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      5 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      6 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      7 1201     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1202     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1203     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1204     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      8 1201     0.0140    0.0048   -0.0001    0.0002   -0.0003   -0.0002
+        1202     0.0160   -0.0087   -0.0023   -0.0003   -0.0004    0.0003
+        1203    -0.0196    0.0052   -0.0004    0.0002    0.0001   -0.0001
+        1204    -0.0176   -0.0082   -0.0026   -0.0003    0.0000    0.0004
+      9 1201    -0.0000    0.0008   -0.0012   -0.0000    0.0000    0.0000
+        1202     0.0000   -0.0009    0.0015    0.0000   -0.0001   -0.0000
+        1203    -0.0000    0.0010   -0.0015   -0.0000    0.0001    0.0000
+        1204    -0.0000   -0.0007    0.0011    0.0000   -0.0000   -0.0000
+     10 1201     0.0221    0.0087   -0.0031    0.0003   -0.0001    0.0000
+        1202     0.0255   -0.0264   -0.0135   -0.0005   -0.0002   -0.0001
+        1203    -0.0125    0.0101   -0.0015    0.0003    0.0002    0.0001
+        1204    -0.0091   -0.0250   -0.0119   -0.0005    0.0002   -0.0000
+     11 1201     0.0000    0.0035   -0.0052   -0.0000   -0.0000   -0.0000
+        1202     0.0000   -0.0029    0.0037   -0.0001   -0.0000   -0.0000
+        1203     0.0000    0.0033   -0.0050   -0.0000    0.0000    0.0000
+        1204    -0.0000   -0.0030    0.0039   -0.0001   -0.0000   -0.0000
+     12 1201     0.0224    0.0127   -0.0004    0.0004   -0.0004   -0.0003
+        1202     0.0271   -0.0191   -0.0026   -0.0005   -0.0006    0.0005
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   13
+
+
+
+
+   JOINT DISPLACEMENT (CM   RADIANS)    STRUCTURE TYPE = SPACE
+   ------------------
+
+ JOINT  LOAD   X-TRANS   Y-TRANS   Z-TRANS   X-ROTAN   Y-ROTAN   Z-ROTAN
+
+
+        1203    -0.0195    0.0136   -0.0008    0.0004   -0.0002   -0.0003
+        1204    -0.0148   -0.0181   -0.0030   -0.0005   -0.0003    0.0005
+     13 1201     0.0222    0.0174   -0.0035    0.0004    0.0002    0.0002
+        1202     0.0269   -0.0392   -0.0139   -0.0006    0.0001   -0.0001
+        1203    -0.0197    0.0189   -0.0018    0.0004    0.0004    0.0002
+        1204    -0.0150   -0.0377   -0.0122   -0.0006    0.0003   -0.0001
+     14 1201     0.0001   -0.0003   -0.0026    0.0000   -0.0001   -0.0000
+        1202     0.0001    0.0000   -0.0113   -0.0001   -0.0000   -0.0000
+        1203     0.0000   -0.0003   -0.0013    0.0000    0.0000    0.0000
+        1204     0.0000    0.0001   -0.0100   -0.0001    0.0000   -0.0000
+     15 1201     0.0224    0.0236   -0.0162    0.0004   -0.0000   -0.0001
+        1202     0.0271   -0.0390   -0.0230   -0.0005   -0.0001    0.0003
+        1203    -0.0197    0.0249   -0.0152    0.0004   -0.0000   -0.0001
+        1204    -0.0150   -0.0376   -0.0220   -0.0005   -0.0002    0.0003
+
+
+   ************** END OF LATEST ANALYSIS RESULT **************
+
+
+   288. *********************************CODE CHECK ALS********************************
+   289. PARAMETER 2
+   290. CODE EN 1993-1-1:2005
+   291. PY 355000 100 101 104 105 106 107
+   292. PY 450000 102 103 108 109 110 111 112 113
+   293. *
+   294. BEAM 3 ALL
+   295. *
+   296. NA 3 ALL
+   297. GM0 1.0 ALL
+   298. GM1 1.0 ALL
+   299. GM2 1.0 ALL
+   300. *
+   301. KY 2 ALL
+   302. KZ 2 ALL
+   303. *
+   304. TRACK 0 ALL
+   305. ELB 1 ALL
+   306. *
+   307. RATIO 1.2 ALL
+   308. *
+   309. LOAD LIST 1101 TO 1103
+   310. *
+   311. CHECK CODE ALL
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   14
+
+STEEL DESIGN   
+
+
+                         STAAD.PRO CODE CHECKING - NS-EN 1993-1-1:2005
+                         ********************************************
+                         NATIONAL ANNEX - NS-EN 1993-1-1:2005/NA 2008
+
+ PROGRAM CODE REVISION V1.13 BS_EC3_2005/1
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   15
+
+
+
+
+ ALL UNITS ARE - KN   METE (UNLESS OTHERWISE Noted)
+
+ MEMBER     TABLE       RESULT/   CRITICAL COND/     RATIO/     LOADING/
+                          FX            MY             MZ       LOCATION
+ =======================================================================
+
+
+     100 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.205      1102
+                        0.56 C          5.24           0.29        0.00
+     101 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.164      1102
+                        0.46 T         -4.34          -0.08        0.00
+     102 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.244      1102
+                       61.89 T         -3.50          -1.75        1.18
+     103 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.189      1102
+                       49.00 T         -3.10           0.92        1.18
+     104 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.340      1102
+                        0.65 T         -5.37          -3.82        0.00
+     105 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.293      1102
+                        0.53 C          4.58           3.35        0.00
+     106 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.330      1102
+                        1.36 C         -5.49          -3.42        0.00
+     107 ST  SHS100X100X6.3                      (EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.101      1102
+                        0.22 T          1.78           0.95        0.00
+     108 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.294      1102
+                        0.16 T          0.17          -9.75        0.40
+     109 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.294      1102
+                        0.16 T         -0.17           9.75        0.00
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   16
+
+
+
+
+ ALL UNITS ARE - KN   METE (UNLESS OTHERWISE Noted)
+
+ MEMBER     TABLE       RESULT/   CRITICAL COND/     RATIO/     LOADING/
+                          FX            MY             MZ       LOCATION
+ =======================================================================
+
+
+     110 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.198      1102
+                       51.02 C          1.00           3.91        0.87
+     111 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.221      1102
+                        0.41 C         -0.06          -7.41        0.00
+     112 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.131      1102
+                       39.18 C         -0.28           2.79        0.92
+     113 ST   SHS100X100X6(EUROPEAN COLDFORMED SECTIONS)
+                           PASS     EC-6.2.1(7)        0.185      1102
+                        0.61 T         -0.35          -5.89        0.00
+
+
+   ************** END OF TABULATED RESULT OF DESIGN **************
+
+
+   312. PRINT JOINT DISPLACEMENTS
+ JOINT    DISPLACE                  
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   17
+
+
+
+
+   JOINT DISPLACEMENT (CM   RADIANS)    STRUCTURE TYPE = SPACE
+   ------------------
+
+ JOINT  LOAD   X-TRANS   Y-TRANS   Z-TRANS   X-ROTAN   Y-ROTAN   Z-ROTAN
+
+
+      1 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      2 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      3 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      4 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      5 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      6 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      7 1101     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1102     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+        1103     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+      8 1101     0.0000    0.0000   -0.0001    0.0000   -0.0000    0.0000
+        1102    -0.0093    0.0618    0.0098    0.0024    0.0005   -0.0022
+        1103    -0.0074   -0.0070   -0.0053   -0.0002   -0.0005    0.0004
+      9 1101     0.0000    0.0000   -0.0001   -0.0000    0.0000   -0.0000
+        1102    -0.0000    0.0080   -0.0123   -0.0002    0.0005    0.0002
+        1103    -0.0000    0.0002    0.0000   -0.0000    0.0000    0.0000
+     10 1101     0.0001   -0.0003   -0.0005    0.0000   -0.0000    0.0000
+        1102    -0.0158    0.1607    0.0474    0.0033    0.0002    0.0007
+        1103     0.0262   -0.0325   -0.0292   -0.0004    0.0001   -0.0001
+     11 1101     0.0000    0.0000   -0.0002   -0.0000    0.0000   -0.0000
+        1102     0.0001    0.0292   -0.0407    0.0002    0.0001    0.0001
+        1103     0.0001    0.0009   -0.0020   -0.0002   -0.0000   -0.0000
+     12 1101     0.0001    0.0001   -0.0001    0.0000   -0.0000    0.0000
+        1102    -0.0214    0.1457    0.0098    0.0038    0.0005   -0.0037
+        1103     0.0150   -0.0113   -0.0067   -0.0002   -0.0015    0.0004
+     13 1101     0.0001   -0.0002   -0.0005    0.0000   -0.0000    0.0000
+        1102    -0.0214    0.2594    0.0474    0.0043    0.0003    0.0012
+        1103     0.0143   -0.0405   -0.0305   -0.0003    0.0010    0.0002
+     14 1101     0.0000   -0.0000   -0.0004   -0.0000    0.0000    0.0000
+        1102    -0.0001   -0.0018    0.0394    0.0006   -0.0001    0.0000
+        1103     0.0002   -0.0005   -0.0243   -0.0002   -0.0000   -0.0000
+     15 1101     0.0001   -0.0001   -0.0003    0.0000   -0.0000    0.0000
+        1102    -0.0214    0.2867    0.0307    0.0041    0.0005   -0.0015
+        1103     0.0147   -0.0283   -0.0767   -0.0003   -0.0003    0.0004
+     CALCULATION PIPESUPPORT                                  -- PAGE NO.   18
+
+
+
+   ************** END OF LATEST ANALYSIS RESULT **************
+
+
+   313. *******************************************************************************
+   314. FINISH
+
+
+             *********** END OF THE STAAD.Pro RUN ***********
+
+               **** DATE= SEP 26,2022   TIME= 13:58:14 ****
+
+         ************************************************************
+         *   For technical assistance on STAAD.Pro, please visit    *
+         *   http://www.bentley.com/en/support/                     *
+         *                                                          *
+         *   Details about additional assistance from               *
+         *   Bentley and Partners can be found at program menu      *
+         *   Help->Technical Support                                *
+         *                                                          *
+         *      Copyright (c) 1997-2017 Bentley Systems, Inc.       *
+         *                http://www.bentley.com                    *
+         ************************************************************
+
