@@ -33,6 +33,10 @@ def main(client, file):
                 cdfutil = CDFUtil(node_name, project, dataset_id, client)
                 data, meta_data = parse_file(anlFile_name)
                 anlFile_name = anlFile_name.replace(".ANL", "")
+                sufix = ''
+                if "_deleted" in anlFile_name:
+                    sufix = 'deleted_'
+                    anlFile_name = anlFile_name.replace("_deleted", "")
                 logging.info(f"Finished parsing file: {anlFile_name}")
                 if not data.empty:
                     cdfutil.create_asset(anlFile_name)
@@ -45,7 +49,7 @@ def main(client, file):
                     calc_df = create_calc_df(seq)
                     if not calc_df.empty:
                         cdfutil.upload_df_as_sequence(
-                            calc_df, anlFile_name, meta_data, "calc_"
+                            calc_df, anlFile_name, meta_data, f"calc_{sufix}"
                         )
                 end_time = time.time()
                 total_time = end_time - start_time

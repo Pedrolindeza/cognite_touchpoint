@@ -1,5 +1,4 @@
 import uuid
-
 import arrow as arrow
 from client_gen import client_gen
 from cognite.client import CogniteClient
@@ -22,17 +21,11 @@ def delete_seq_rel(prefix, client: CogniteClient):
     for a, low in rel.iterrows():
         if prefix in low["targetExternalId"]:
             client.relationships.delete(external_id=low["externalId"])
-    # client.assets.delete(external_id="noa-fulla-staad-OS-AP500APG038")
 
 
 def seq_for_amit():
     ids = [
-        1287149333386410,
-        7823005911720794,
-        7460367384177970,
-        4128452059777526,
-        260961076492924,
-        7973159500793864,
+        7658022579365504
     ]
 
     list_seq = client_gen("test").sequences.list(limit=None).to_pandas()
@@ -253,6 +246,18 @@ def delete_recent_input(client, prefix):
     for i in range(aux.shape[0] - 1):
         delete_seq_rel(aux.loc[i, "externalId"], client)
 
+def delete_old_wtb_sum(client):
+    seq_df = client.sequences.list(limit=None, external_id_prefix="noafulla_SUMMARY").to_pandas()
+    aux2 = seq_df.copy()  # to avoid warnings
+    aux2.loc[:, "createdTime"] = pd.to_datetime(aux2.loc[:, "createdTime"], unit="ms")
+    aux = aux2.copy()  # to avoid warnings
+    aux.sort_values(by="createdTime", inplace=True, ascending=True)
+    aux.reset_index(inplace=True)
+    for i in range(aux.shape[0] - 1):
+        delete_seq_rel(aux.loc[i, "externalId"], client)
+
 
 if __name__ == "__main__":
     client = client_gen("test")
+    delete_seq_rel("noafulla_caesar_critical_loads_base_case_29001_d7796bf9-cf11-48ae-928e-c6e9daf0bf1d", client)
+

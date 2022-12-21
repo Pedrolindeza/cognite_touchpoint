@@ -30,24 +30,48 @@ def main(client, input_stress=list):
             e3d_data = e3d_data.loc[e3d_data["IsDeleted"] != "1"]
             for stress_file_name in unique_seq_names(cdfutil):
                 print(stress_file_name)
-                # if input_stress and stress_file_name not in input_stress:
+                #if input_stress and stress_file_name not in input_stress:
                 #    continue
+                ##
+                isDeleted = False
+                if stress_file_name.startswith("deleted_"):
+                    isDeleted = True
                 logging.info(f"Retrieveing latest {stress_file_name} from CDF")
                 calc_seq, calc_info = cdfutil.retrieve_latest_sequence(
                     stress_file_name, is_base_case=False
                 )
 
                 report = create_report_from_df(
-                    calc_seq, calc_info, e3d_data, stress_file_name
+                    calc_seq, calc_info, e3d_data, stress_file_name.replace("deleted_", "")
                 )
 
                 if not cdfutil.base_case_exists(stress_file_name):
                     logging.info("Creating base case based on input file")
+                    if isDeleted:
+                        try:
+                            report, seq_bc_info = cdfutil.retrieve_latest_sequence(
+                                stress_file_name.replace("deleted_", ""), is_base_case=True
+                            )
+                            cdfutil.delete_seq_rel(
+                                f"noafulla_staad_PS_base_case_{stress_file_name.replace('deleted_', '')}")
+                        except Exception:
+                            logging.warning(f"Could not find {stress_file_name.replace('deleted_', '')} to delete "
+                                            f"from CDF")
+                            pass
+                    try:
+                        cdfutil.delete_seq_rel(
+                            f"noafulla_staad_PS_base_case_deleted_{stress_file_name}")
+                    except Exception as e:
+                        logging.warning(f"Could not find {stress_file_name.replace('deleted_', '')} to delete "
+                                        f"from CDF")
                     meta_data = cdfutil.create_meta_data(calc_info.id, None)
                     _ = cdfutil.upload_df_as_sequence(
                         report, stress_file_name, meta_data
                     )
+
                 else:
+                    if isDeleted:
+                        continue
                     base_case, seq_bc_info = cdfutil.retrieve_latest_sequence(
                         stress_file_name, is_base_case=True
                     )

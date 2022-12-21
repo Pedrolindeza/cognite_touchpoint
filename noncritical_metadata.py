@@ -42,6 +42,8 @@ def main(client: CogniteClient) -> None:
                 "X_pjoi": "X (m)",
                 "Y_pjoi": "Y (m)",
                 "Z_pjoi": "Z (m)",
+                "deleted_pjoi": "isDeleted_pjoi",
+                "deleted_pipe": "isDeleted_pipe",
             }
             logging.info("Parsing raw rows for relationships")
             pipe_to_node_df = get_pipe_to_node_df(e3d_df, list(column_map.keys()))
@@ -51,10 +53,15 @@ def main(client: CogniteClient) -> None:
                 logging.info("Dataframe is empty no sequence will be created")
             else:
                 try:
-
                     non_critical_loads_df = non_critical_loads_df.rename(
                         columns=column_map
                     )
+                    try:
+                        tmp_metadata = client.raw.rows.retrieve_dataframe(db_name=db, table_name=metadata_table_name,
+                                                                          limit=-1)
+                        client.raw.rows.delete(db_name=db, table_name=metadata_table_name, key=list(tmp_metadata.index))
+                    except Exception as e:
+                        logging.warning(f"Exception while deleting previous metadata table: {e}")
                     client.raw.rows.insert_dataframe(
                         db, metadata_table_name, non_critical_loads_df
                     )

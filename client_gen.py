@@ -1,5 +1,5 @@
 import yaml
-from cognite.experimental import CogniteClient
+from cognite.client import CogniteClient
 
 
 def client_gen(env):

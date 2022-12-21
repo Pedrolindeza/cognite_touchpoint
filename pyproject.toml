@@ -17,6 +17,8 @@ pre-commit = "^2.19.0"
 types-PyYAML = "^6.0.8"
 PyYAML = "^6.0"
 coverage = "^6.4.2"
+cognite = "^0.0.4"
+cognite-sdk = "3.*"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
